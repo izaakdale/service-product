@@ -1,5 +1,3 @@
-github.com/izaakdale/utils-go v1.0.5 h1:IbOrJKSnv6lTl+hRrN7Wa/Qtn+OfGG/LVQix3a82AAI=
-github.com/izaakdale/utils-go v1.0.5/go.mod h1:nrzTq2C5z6w0HZhHRNiudPuHjiXdobFzq5PKp9+nVOM=
 github.com/izaakdale/utils-go v1.0.6-0.20221007143240-2ccea1723a57 h1:WZ5/971DTgX2fwoOgKDy0LxbIAV3cerhV1ROSRSTZjk=
 github.com/izaakdale/utils-go v1.0.6-0.20221007143240-2ccea1723a57/go.mod h1:nrzTq2C5z6w0HZhHRNiudPuHjiXdobFzq5PKp9+nVOM=
 github.com/julienschmidt/httprouter v1.3.0 h1:U0609e9tgbseu3rBINet9P48AI/D3oJs4dN7jwJOQ1U=

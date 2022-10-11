@@ -15,8 +15,8 @@ type Client struct {
 	db *sql.DB
 }
 
-func OpenClientConnection(host, user, password, tableName string) error {
-	db, err := sql.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s:5432/%s?sslmode=disable", user, password, host, tableName))
+func OpenClientConnection(host, port, user, password, tableName string) error {
+	db, err := sql.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", user, password, host, port, tableName))
 	if err != nil {
 		return err
 	}

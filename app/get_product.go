@@ -13,7 +13,7 @@ func GetProductHandler(w http.ResponseWriter, r *http.Request) {
 
 	p, err := db.ClientQueries().GetProduct(context.Background(), id)
 	if err != nil {
-		response.WriteJson(w, http.StatusBadRequest, response.Response{
+		response.WriteJson(w, http.StatusInternalServerError, response.Response{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
 		})

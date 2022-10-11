@@ -6,7 +6,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func NewRouter() *httprouter.Router {
+func Router() *httprouter.Router {
 	r := httprouter.New()
 	r.HandlerFunc("GET", "/", ListProductsHandler)
 	r.HandlerFunc("GET", "/:id", GetProductHandler)

@@ -10,9 +10,9 @@ import (
 
 func main() {
 	// TODO remove hard code
-	err := db.OpenClientConnection("", "", "")
+	err := db.OpenClientConnection("localhost", "admin", "password", "ordering-app")
 	if err != nil {
 		panic(err)
 	}
-	log.Fatal(http.ListenAndServe("localhost:8082", app.NewRouter()))
+	log.Fatal(http.ListenAndServe("localhost:8082", app.Router()))
 }

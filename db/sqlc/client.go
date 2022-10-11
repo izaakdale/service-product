@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/lib/pq"
 )
@@ -14,8 +15,8 @@ type Client struct {
 	db *sql.DB
 }
 
-func OpenClientConnection(host, user, password string) error {
-	db, err := sql.Open("postgres", "postgresql://admin:password@localhost:5432/ordering-app?sslmode=disable")
+func OpenClientConnection(host, user, password, tableName string) error {
+	db, err := sql.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s:5432/%s?sslmode=disable", user, password, host, tableName))
 	if err != nil {
 		return err
 	}

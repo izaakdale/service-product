@@ -8,10 +8,11 @@ import (
 	"github.com/izaakdale/utils-go/response"
 )
 
-func GetProductHandler(w http.ResponseWriter, r *http.Request) {
-	id := getParam(r.Context(), "id")
-
-	p, err := db.ClientQueries().GetProduct(context.Background(), id)
+func ListProductsHandler(w http.ResponseWriter, r *http.Request) {
+	lp, err := db.ClientQueries().ListProducts(context.Background(), db.ListProductsParams{
+		Limit:  10,
+		Offset: 0,
+	})
 	if err != nil {
 		response.WriteJson(w, http.StatusBadRequest, response.Response{
 			Code:    http.StatusInternalServerError,
@@ -19,5 +20,5 @@ func GetProductHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-	response.WriteJson(w, http.StatusOK, p)
+	response.WriteJson(w, http.StatusOK, lp)
 }

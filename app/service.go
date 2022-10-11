@@ -8,7 +8,8 @@ import (
 
 func NewRouter() *httprouter.Router {
 	r := httprouter.New()
-	r.HandlerFunc("GET", "/product/:id", GetProductHandler)
+	r.HandlerFunc("GET", "/", ListProductsHandler)
+	r.HandlerFunc("GET", "/:id", GetProductHandler)
 	return r
 }
 

@@ -14,7 +14,7 @@ func ListProductsHandler(w http.ResponseWriter, r *http.Request) {
 		Offset: 0,
 	})
 	if err != nil {
-		response.WriteJson(w, http.StatusBadRequest, response.Response{
+		response.WriteJson(w, http.StatusInternalServerError, response.Response{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
 		})

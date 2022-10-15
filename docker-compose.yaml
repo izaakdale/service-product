@@ -11,6 +11,8 @@ services:
       POSTGRES_DB: ordering-app
     networks:
       - backend
+    volumes:
+      - 'service-product-db:/var/lib/postgresql/data'
   api:
     container_name: app
     image: service-product:latest
@@ -30,3 +32,6 @@ services:
 
 networks:
   backend:
+volumes:
+    service-product-db:
+        driver: local

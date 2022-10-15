@@ -37,17 +37,16 @@ func OpenClientConnection(host, port, user, password, tableName string) error {
 	var counts int
 	for {
 		conn, err := connectToDb(host, port, user, password, tableName)
-		if err != nil {
-			logger.Error("Could not connect to db, attempting reconnect")
-			counts++
-		} else {
-			// TODO make more idiomatic
+		if err == nil {
 			logger.Info("Connected to the DB!")
 			client = &Client{
 				db:      conn,
 				Queries: New(conn),
 			}
 			break
+		} else {
+			logger.Error("Could not connect to db, attempting reconnect")
+			counts++
 		}
 		if counts > 10 {
 			logger.Error("Connection attempts surpassed 10, giving up...")

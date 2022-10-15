@@ -3,7 +3,10 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"log"
+	"time"
 
+	"github.com/izaakdale/utils-go/logger"
 	_ "github.com/lib/pq"
 )
 
@@ -15,17 +18,44 @@ type Client struct {
 	db *sql.DB
 }
 
-func OpenClientConnection(host, port, user, password, tableName string) error {
+func connectToDb(host, port, user, password, tableName string) (*sql.DB, error) {
 	db, err := sql.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", user, password, host, port, tableName))
 	if err != nil {
-		return err
+		logger.Error("error opening db")
+		return nil, err
 	}
-	if err := db.Ping(); err != nil {
-		return err
+	err = db.Ping()
+	if err != nil {
+		logger.Error("error pinging db")
+		return nil, err
 	}
-	client = &Client{
-		db:      db,
-		Queries: New(db),
+	return db, err
+}
+
+func OpenClientConnection(host, port, user, password, tableName string) error {
+
+	var counts int
+	for {
+		conn, err := connectToDb(host, port, user, password, tableName)
+		if err != nil {
+			logger.Error("Could not connect to db, attempting reconnect")
+			counts++
+		} else {
+			// TODO make more idiomatic
+			logger.Info("Connected to the DB!")
+			client = &Client{
+				db:      conn,
+				Queries: New(conn),
+			}
+			break
+		}
+		if counts > 10 {
+			logger.Error("Connection attempts surpassed 10, giving up...")
+			return err
+		}
+		log.Println("Back off for two seconds")
+		time.Sleep(time.Second * 2)
+		continue
 	}
 	return nil
 }

@@ -17,7 +17,7 @@ services:
     container_name: app
     image: service-product:latest
     ports:
-      - "8080:80"
+      - "8082:80"
     environment:
       - DB_HOST=db
       - DB_PORT=5432

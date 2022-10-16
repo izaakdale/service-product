@@ -10,6 +10,7 @@ func Router() *httprouter.Router {
 	r := httprouter.New()
 	r.HandlerFunc("GET", "/", ListProductsHandler)
 	r.HandlerFunc("GET", "/:id", GetProductHandler)
+	r.HandlerFunc("POST", "/", CreateProductHandler)
 	return r
 }
 
